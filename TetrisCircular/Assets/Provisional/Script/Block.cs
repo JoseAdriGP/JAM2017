@@ -8,6 +8,7 @@ public class Block : MonoBehaviour {
 	private const float drainSpeed = 10.0f;
 
 	private SpriteRenderer renderer;
+	private Animator anim;
 
 	private ColorManager.BlockColor _blockColor;
 	public ColorManager.BlockColor BlockColor {
@@ -18,6 +19,10 @@ public class Block : MonoBehaviour {
 		}
 	}
 
+	public void finishDraining () {
+		anim.enabled = false;
+	}
+
 	private IEnumerator movementCoroutine () {
 		while (true) {
 			Vector3 _movementVector = drainPosition - transform.localPosition;
@@ -26,6 +31,7 @@ public class Block : MonoBehaviour {
 
 			if (_currentDistance < _displacement) {
 				transform.localPosition = drainPosition;
+				anim.enabled = true;
 				break;
 			}
 
@@ -44,6 +50,7 @@ public class Block : MonoBehaviour {
 
 	void Awake () {
 		renderer = GetComponent<SpriteRenderer> ();
+		anim = GetComponent<Animator> ();
 	}
 
 	// Use this for initialization

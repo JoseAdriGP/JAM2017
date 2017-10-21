@@ -36,7 +36,7 @@ public class Group : MonoBehaviour {
 		// Add new children to grid
 		foreach (Transform child in transform) {
 			Vector2 v = Grid.roundVec2(child.position);
-			Grid.grid[(int)v.x, (int)v.y] = child;
+			Grid.grid [(int)v.x, (int)v.y] = child.transform;
 		}        
 	}
 
@@ -52,14 +52,16 @@ public class Group : MonoBehaviour {
 	}
 
 	void Awake () {
+		ColorManager.BlockColor _groupColor = ColorManager.Instance.GetRandomColor ();
+		foreach (Transform child in transform) {
+			GameObject _block = Instantiate (BlockPrefab);
+			_block.transform.SetParent (child, false);
+			_block.GetComponent<Block>().BlockColor = _groupColor;
+		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		foreach (Transform child in transform) {
-			GameObject _block = Instantiate (BlockPrefab);
-			_block.transform.SetParent (child, false);
-		}
 		// Default position not valid? Then it's game over
 		if (!isValidGridPos()) {
 			Debug.Log("GAME OVER");

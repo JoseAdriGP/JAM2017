@@ -23,8 +23,10 @@ public class Grid : MonoBehaviour {
 
 	public static void deleteRow(int y) {
 		for (int x = 0; x < w; ++x) {
-			Destroy(grid[x, y].gameObject);
-			grid[x, y] = null;
+			var _block = grid [x, y].GetChild(0).gameObject;
+			Block _blockScript = _block.GetComponent<Block> ();
+			_blockScript.drain ();
+			grid [x, y] = null;
 		}
 	}
 

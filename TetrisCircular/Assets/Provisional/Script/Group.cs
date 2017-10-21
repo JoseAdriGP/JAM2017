@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Group : MonoBehaviour {
 
+	public GameObject BlockPrefab;
+
 	// Time since last gravity tick
 	float lastFall = 0;
 
@@ -38,8 +40,15 @@ public class Group : MonoBehaviour {
 		}        
 	}
 
+	void Awake () {
+	}
+
 	// Use this for initialization
 	void Start () {
+		foreach (Transform child in transform) {
+			GameObject _block = Instantiate (BlockPrefab);
+			_block.transform.SetParent (child, false);
+		}
 		// Default position not valid? Then it's game over
 		if (!isValidGridPos()) {
 			Debug.Log("GAME OVER");

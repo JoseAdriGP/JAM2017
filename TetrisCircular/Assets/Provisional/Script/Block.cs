@@ -38,6 +38,7 @@ public class Block : MonoBehaviour {
 	}
 
 	public void drain () {
+		++renderer.sortingOrder;
 		StartCoroutine (movementCoroutine ());
 	}
 

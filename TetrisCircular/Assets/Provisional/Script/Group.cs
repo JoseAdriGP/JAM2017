@@ -51,6 +51,23 @@ public class Group : MonoBehaviour {
 		}
 	}
 
+	void rotateGroup() {
+		transform.Rotate(0, 0, -90);
+
+		// See if valid
+		if (isValidGridPos ()) {
+			// It's valid. Update grid.
+			updateGrid ();
+
+			foreach (Transform t in transform) {
+				t.Rotate (0, 0, 90);
+			}
+		}
+		else
+			// It's not valid. revert.
+			transform.Rotate(0, 0, 90);
+	}
+
 	void Awake () {
 		ColorManager.BlockColor _groupColor = ColorManager.Instance.GetRandomColor ();
 		foreach (Transform child in transform) {
@@ -101,15 +118,7 @@ public class Group : MonoBehaviour {
 
 		// Rotate
 		else if (Input.GetKeyDown(KeyCode.UpArrow)) {
-			transform.Rotate(0, 0, -90);
-
-			// See if valid
-			if (isValidGridPos())
-				// It's valid. Update grid.
-				updateGrid();
-			else
-				// It's not valid. revert.
-				transform.Rotate(0, 0, 90);
+			rotateGroup ();
 		}
 
 		// Move Downwards and Fall

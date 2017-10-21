@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour {
 
-	private static readonly Vector3 drainPosition = new Vector3(4.5f, -0.9f, 0.0f);
+	private static readonly Vector3 drainPosition = new Vector3(4.5f, -3.5f, 0.0f);
 	private const float drainSpeed = 10.0f;
 
 	private SpriteRenderer renderer;

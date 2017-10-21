@@ -6,7 +6,7 @@ public class Grid : MonoBehaviour {
 
 	//The Grid itself
 	public static int w = 10;
-	public static int h = 20;
+	public static int h = 25;
 	public static Transform[,] grid = new Transform[w, h];
 
 	public static Vector2 roundVec2(Vector2 v) {

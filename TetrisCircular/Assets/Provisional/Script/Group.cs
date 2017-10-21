@@ -40,6 +40,17 @@ public class Group : MonoBehaviour {
 		}        
 	}
 
+	void unlinkChildren() {
+		List<Transform> children = new List<Transform> ();
+		foreach (Transform t in transform) {
+			children.Add (t);
+		}
+
+		foreach (Transform t in children) {
+			t.SetParent (null, true);
+		}
+	}
+
 	void Awake () {
 	}
 
@@ -119,8 +130,9 @@ public class Group : MonoBehaviour {
 				// Spawn next Group
 				FindObjectOfType<Spawner>().spawnNext();
 
-				// Disable script
-				enabled = false;
+				// Leave children in the grid and die
+				unlinkChildren ();
+				Destroy (gameObject);
 			}
 
 			lastFall = Time.time;

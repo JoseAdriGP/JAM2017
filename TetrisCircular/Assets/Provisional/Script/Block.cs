@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class Block : MonoBehaviour {
 
+	private SpriteRenderer renderer;
+
+	private ColorManager.BlockColor _blockColor;
+	public ColorManager.BlockColor BlockColor {
+		get { return _blockColor; }
+		set {
+			_blockColor = value;
+			renderer.sprite = ColorManager.Instance.SpritesByColor [_blockColor];
+		}
+	}
+
+	void Awake () {
+		renderer = GetComponent<SpriteRenderer> ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		

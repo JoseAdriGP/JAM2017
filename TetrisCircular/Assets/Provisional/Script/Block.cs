@@ -11,7 +11,7 @@ public class Block : MonoBehaviour {
 		get { return _blockColor; }
 		set {
 			_blockColor = value;
-
+			renderer.sprite = ColorManager.Instance.SpritesByColor [_blockColor];
 		}
 	}
 

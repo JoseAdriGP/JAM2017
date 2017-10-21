@@ -348,6 +348,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a7af432275f43b685423be4a42b3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GreenBlock: {fileID: 21300000, guid: ea86bfc1b28ca4d4ebb0c0ed4a4730d7, type: 3}
+  RedBlock: {fileID: 21300000, guid: ea86bfc1b28ca4d4ebb0c0ed4a4730d7, type: 3}
+  BlueBlock: {fileID: 21300000, guid: ea86bfc1b28ca4d4ebb0c0ed4a4730d7, type: 3}
+  YellowBlock: {fileID: 21300000, guid: ea86bfc1b28ca4d4ebb0c0ed4a4730d7, type: 3}
 --- !u!4 &1636213704
 Transform:
   m_ObjectHideFlags: 0

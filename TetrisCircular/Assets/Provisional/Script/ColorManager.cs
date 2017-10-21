@@ -16,8 +16,8 @@ public class ColorManager : MonoBehaviour {
 	public Sprite BlueBlock;
 	public Sprite YellowBlock;
 
-	public static Dictionary<BlockColor, Sprite> _spritesByColor;
-	public static Dictionary<BlockColor, Sprite> SpritesByColor {
+	public Dictionary<BlockColor, Sprite> _spritesByColor;
+	public Dictionary<BlockColor, Sprite> SpritesByColor {
 		get { return _spritesByColor; }
 		private set { _spritesByColor = value; }
 	}

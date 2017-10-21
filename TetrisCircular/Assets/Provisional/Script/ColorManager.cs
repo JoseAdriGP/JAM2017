@@ -16,8 +16,8 @@ public class ColorManager : MonoBehaviour {
 	public Sprite BlueBlock;
 	public Sprite YellowBlock;
 
-	public static Dictionary<BlockColor, Sprite> _spritesByColor;
-	public static Dictionary<BlockColor, Sprite> SpritesByColor {
+	public Dictionary<BlockColor, Sprite> _spritesByColor;
+	public Dictionary<BlockColor, Sprite> SpritesByColor {
 		get { return _spritesByColor; }
 		private set { _spritesByColor = value; }
 	}
@@ -26,6 +26,23 @@ public class ColorManager : MonoBehaviour {
 	public static ColorManager Instance {
 		get { return _instance; }
 		private set { _instance = value; } 
+	}
+
+	public BlockColor GetRandomColor() {
+		int _index = Random.Range (0, 4);
+
+		switch (_index) {
+		case 0:
+			return BlockColor.GREEN;
+		case 1:
+			return BlockColor.RED;
+		case 2:
+			return BlockColor.BLUE;
+		case 3:
+			return BlockColor.YELLOW;
+		default:
+			return BlockColor.GREEN;
+		}
 	}
 
 	void Awake () {

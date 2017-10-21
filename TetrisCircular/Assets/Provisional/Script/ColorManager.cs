@@ -28,6 +28,23 @@ public class ColorManager : MonoBehaviour {
 		private set { _instance = value; } 
 	}
 
+	public BlockColor GetRandomColor() {
+		int _index = Random.Range (0, 4);
+
+		switch (_index) {
+		case 0:
+			return BlockColor.GREEN;
+		case 1:
+			return BlockColor.RED;
+		case 2:
+			return BlockColor.BLUE;
+		case 3:
+			return BlockColor.YELLOW;
+		default:
+			return BlockColor.GREEN;
+		}
+	}
+
 	void Awake () {
 		if (Instance == null) {
 			Instance = this;

@@ -26,9 +26,11 @@ public class Block : MonoBehaviour {
 	}
 
 	private IEnumerator accumulationCoroutine () {
+		TetrominosList _tetrominosList = FindObjectOfType<TetrominosList> ();
+		Vector2 __counterPosition = _tetrominosList.GetPos (BlockColor);
+		Vector3 _counterPosition = new Vector3 (__counterPosition.x, __counterPosition.y, 0.0f);
 		while (true) {
-			// TODO Replace drainPosition with the position given by the builder object for this block's color
-			Vector3 _movementVector = drainPosition - transform.localPosition;
+			Vector3 _movementVector = _counterPosition - transform.localPosition;
 			float _displacement = Time.deltaTime * drainSpeed;
 			float _currentDistance = _movementVector.magnitude;
 

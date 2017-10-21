@@ -122,7 +122,7 @@ public class Group : MonoBehaviour {
 		}
 
 		// Move Downwards and Fall
-		else if (Input.GetKeyDown(KeyCode.DownArrow) ||
+		else if (Input.GetKey(KeyCode.DownArrow) ||
 			Time.time - lastFall >= 1) {
 			// Modify position
 			transform.position += new Vector3(0, -1, 0);

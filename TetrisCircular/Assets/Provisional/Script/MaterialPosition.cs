@@ -12,14 +12,15 @@ public class MaterialPosition : MonoBehaviour {
 	public GameObject TopRightPosition;
 	public GameObject BottomLeftPosition;
 
+
+	private List<Vector3> positionElements = new List<Vector3>();
 	private List<GameObject> elementList;
 
 	// The funtion for generate de number of elements in radom position in a range we gave
 	public void ElementGenerator(int elements){
 		Vector3 randVec;
-		List<Vector3> positionElements = new List<Vector3>();
 		do{
-			randVec = new Vector3(Random.Range(BottomLeftPosition.GetComponent<Transform>().position.x, TopRightPosition.GetComponent<Transform>().position.x), Random.Range(BottomLeftPosition.GetComponent<Transform>().position.x, TopRightPosition.GetComponent<Transform>().position.x), 0.0f);
+			randVec = new Vector3(Random.Range(BottomLeftPosition.GetComponent<Transform>().position.x, TopRightPosition.GetComponent<Transform>().position.x), Random.Range(BottomLeftPosition.GetComponent<Transform>().position.y, TopRightPosition.GetComponent<Transform>().position.y), 0.0f);
 			if(!positionElements.Contains(randVec)){
 				GameObject arbol = Instantiate(elementType,randVec,Quaternion.identity);
 				arbol.GetComponent<SpriteRenderer>().sprite = elementSprite;
@@ -49,12 +50,12 @@ public class MaterialPosition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		elementNumber = 6;
 		elementList = new List<GameObject>();
+		ElementGenerator(elementNumber);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+	
 	}
 }

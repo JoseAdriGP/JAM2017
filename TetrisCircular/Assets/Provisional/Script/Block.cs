@@ -20,18 +20,18 @@ public class Block : MonoBehaviour {
 
 	private IEnumerator movementCoroutine () {
 		while (true) {
-			Vector3 _movementVector = drainPosition - transform.parent.localPosition;
+			Vector3 _movementVector = drainPosition - transform.localPosition;
 			float _displacement = Time.deltaTime * drainSpeed;
 			float _currentDistance = _movementVector.magnitude;
 
 			if (_currentDistance < _displacement) {
-				transform.parent.localPosition = drainPosition;
+				transform.localPosition = drainPosition;
 				break;
 			}
 
 			_movementVector = _movementVector * _displacement / _currentDistance;
 
-			transform.parent.localPosition = transform.parent.localPosition + _movementVector;
+			transform.localPosition = transform.localPosition + _movementVector;
 
 			yield return null;
 		}

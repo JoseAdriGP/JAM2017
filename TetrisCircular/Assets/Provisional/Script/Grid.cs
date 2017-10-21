@@ -6,7 +6,7 @@ public class Grid : MonoBehaviour {
 
 	//The Grid itself
 	public static int w = 10;
-	public static int h = 20;
+	public static int h = 25;
 	public static Transform[,] grid = new Transform[w, h];
 
 	public static Vector2 roundVec2(Vector2 v) {
@@ -23,10 +23,13 @@ public class Grid : MonoBehaviour {
 
 	public static void deleteRow(int y) {
 		for (int x = 0; x < w; ++x) {
-			var _block = grid [x, y].GetChild(0).gameObject;
-			Block _blockScript = _block.GetComponent<Block> ();
-			_blockScript.drain ();
+			var _block = grid [x, y].gameObject;
 			grid [x, y] = null;
+			var _blockChild = _block.transform.GetChild(0).gameObject;
+			_blockChild.transform.SetParent (null, true);
+			Destroy (_block);
+			Block _blockScript = _blockChild.GetComponent<Block> ();
+			_blockScript.drain ();
 		}
 	}
 

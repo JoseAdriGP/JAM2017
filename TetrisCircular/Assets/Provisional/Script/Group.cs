@@ -36,7 +36,7 @@ public class Group : MonoBehaviour {
 		// Add new children to grid
 		foreach (Transform child in transform) {
 			Vector2 v = Grid.roundVec2(child.position);
-			Grid.grid[(int)v.x, (int)v.y] = child;
+			Grid.grid [(int)v.x, (int)v.y] = child.transform;
 		}        
 	}
 

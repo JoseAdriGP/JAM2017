@@ -11,10 +11,10 @@ public class CurrentColorsManager : MonoBehaviour
 	//public Function
 
 	[Header ("Text Show")]
-	public Text CurrentRojo;
-	public Text CurrentAzul;
-	public Text CurrentAmarillo;
-	public Text CurrentVerde;
+	public TextMesh CurrentRojo;
+	public TextMesh CurrentAzul;
+	public TextMesh CurrentAmarillo;
+	public TextMesh CurrentVerde;
 
 
 

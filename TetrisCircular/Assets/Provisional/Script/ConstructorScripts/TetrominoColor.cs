@@ -9,6 +9,14 @@ public class TetrominoColor : MonoBehaviour
 	public string colorAsignado;
 	public int TetrominoModel = 0;
 
+	public Sprite ColorRed;
+
+	public Sprite ColorAmarillo;
+
+	public Sprite ColorVerde;
+
+	public Sprite ColorAzul;
+
 	void Start ()
 	{
 		AsignRandomColor ();
@@ -33,15 +41,15 @@ public class TetrominoColor : MonoBehaviour
 
 		transform.GetChild (3).gameObject.GetComponent<Transform> ().localPosition = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].mino4;
 
-		if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color != Color.clear) {
+		if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color != null) {
 
-			transform.GetChild (0).gameObject.GetComponent<SpriteRenderer> ().color = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
+			transform.GetChild (0).gameObject.GetComponent<SpriteRenderer> ().sprite = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
 
-			transform.GetChild (1).gameObject.GetComponent<SpriteRenderer> ().color = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
+			transform.GetChild (1).gameObject.GetComponent<SpriteRenderer> ().sprite = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
 
-			transform.GetChild (2).gameObject.GetComponent<SpriteRenderer> ().color = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
+			transform.GetChild (2).gameObject.GetComponent<SpriteRenderer> ().sprite = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
 
-			transform.GetChild (3).gameObject.GetComponent<SpriteRenderer> ().color = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
+			transform.GetChild (3).gameObject.GetComponent<SpriteRenderer> ().sprite = FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].Color;
 
 
 		} else {
@@ -242,11 +250,11 @@ public class TetrominoColor : MonoBehaviour
 
 	void AsignRandomColor ()
 	{
-		Color color = RandomColor ();
+		Sprite color = RandomColor ();
 
 		for (int i = 0; i < transform.childCount; i++) {
 
-			transform.GetChild (i).GetComponent<SpriteRenderer> ().color = color;
+			transform.GetChild (i).GetComponent<SpriteRenderer> ().sprite = color;
 
 
 
@@ -304,29 +312,29 @@ public class TetrominoColor : MonoBehaviour
 	
 	}
 
-	private Color RandomColor ()
+	private Sprite RandomColor ()
 	{
 
-		Color RndColor = Color.white;
+		Sprite RndColor = null;
 		int randomNumber = Random.Range (1, 5);
 
 		switch (randomNumber) {
 
 		case 1:
-			RndColor = Color.blue;
+			RndColor = ColorAzul;
 			colorAsignado = "Azul";
 			break;
 		case 2:
-			RndColor = Color.green;
+			RndColor = ColorVerde;
 			colorAsignado = "Verde";
 			break;
 
 		case 3:
-			RndColor = Color.red;
+			RndColor = ColorRed;
 			colorAsignado = "Rojo";
 			break;
 		case 4:
-			RndColor = Color.yellow;
+			RndColor = ColorAmarillo;
 			colorAsignado = "Amarillo";
 			break;
 

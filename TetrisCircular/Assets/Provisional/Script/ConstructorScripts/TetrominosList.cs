@@ -26,7 +26,7 @@ public class TetrominosList : MonoBehaviour
 		public string ColorAsignado;
 
 
-		public Color Color;
+		public Sprite Color;
 
 		public int[] MinoReady;
 

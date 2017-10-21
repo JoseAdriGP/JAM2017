@@ -21,6 +21,30 @@ public class Block : MonoBehaviour {
 
 	public void finishDraining () {
 		anim.enabled = false;
+
+		StartCoroutine (accumulationCoroutine ());
+	}
+
+	private IEnumerator accumulationCoroutine () {
+		while (true) {
+			// TODO Replace drainPosition with the position given by the builder object for this block's color
+			Vector3 _movementVector = drainPosition - transform.localPosition;
+			float _displacement = Time.deltaTime * drainSpeed;
+			float _currentDistance = _movementVector.magnitude;
+
+			if (_currentDistance < _displacement) {
+				transform.localPosition = drainPosition;
+				updateTetriminoCounters ();
+				Destroy (gameObject);
+				break;
+			}
+
+			_movementVector = _movementVector * _displacement / _currentDistance;
+
+			transform.localPosition = transform.localPosition + _movementVector;
+
+			yield return null;
+		}
 	}
 
 	private IEnumerator movementCoroutine () {
@@ -41,6 +65,30 @@ public class Block : MonoBehaviour {
 
 			yield return null;
 		}
+	}
+
+	private void updateTetriminoCounters ()
+	{
+		switch (BlockColor) {
+
+		case ColorManager.BlockColor.RED:
+			CurrentColorsManager.MinoRojo++;
+			break;
+
+		case ColorManager.BlockColor.BLUE:
+			CurrentColorsManager.MinoAzul++;
+			break;
+
+		case ColorManager.BlockColor.GREEN:
+			CurrentColorsManager.MinoVerde++;
+			break;
+
+		case ColorManager.BlockColor.YELLOW:
+			CurrentColorsManager.MinoAmarillo++;
+			break;
+		}
+
+		FindObjectOfType <CurrentColorsManager> ().ShowCurrentMinos ();
 	}
 
 	public void drain () {

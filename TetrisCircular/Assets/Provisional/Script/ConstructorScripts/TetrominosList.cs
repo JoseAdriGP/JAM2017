@@ -36,6 +36,15 @@ public class TetrominosList : MonoBehaviour
 
 	public  List <MinoPosInfo> MinoPos = new List<MinoPosInfo> ();
 
+	public Transform Amarillo;
+
+	public Transform Verde;
+
+	public Transform Rojo;
+
+	public Transform Azul;
+
+
 	void Start ()
 	{
 		
@@ -45,5 +54,38 @@ public class TetrominosList : MonoBehaviour
 	void Update ()
 	{
 		
+	}
+
+	public Vector2 GetPos (ColorManager.BlockColor Color)
+	{
+
+		Vector2 Pos = new Vector2 (0, 0);
+
+		switch (Color) {
+
+		case ColorManager.BlockColor.YELLOW:
+			Pos = Amarillo.position;
+			break;
+
+		case ColorManager.BlockColor.GREEN:
+			Pos = Verde.position;
+			break;
+
+		case ColorManager.BlockColor.RED:
+			Pos = Rojo.position;
+			break;
+
+		case ColorManager.BlockColor.BLUE:
+			Pos = Azul.position;
+			break;
+
+
+
+
+
+		}
+		return Pos;
+
+
 	}
 }

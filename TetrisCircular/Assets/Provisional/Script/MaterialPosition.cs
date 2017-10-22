@@ -129,6 +129,8 @@ public class MaterialPosition : MonoBehaviour {
 	public void deleteElements(int elements){
 		if (elements < elementList.Count) {
 			for(int i=0; i<elements; i++){
+				//play the destruction audio
+				chainsawAudio.Play();
 				Destroy(elementList[elementList.Count-1], 0.0f);
 				elementList.RemoveAt (elementList.Count-1);
 				elementNumber -= elements;

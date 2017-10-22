@@ -328,14 +328,14 @@ public class TetrominoColor : MonoBehaviour
 	void CheckInput ()
 	{
 		
-		if (Input.GetButtonDown ("LTrigger")) {
+		if (Input.GetButtonDown ("LTrigger") || Input.GetKeyDown (KeyCode.LeftArrow)) {
 			print ("Button1");
 			Left ();
 		
 		
 		}
 
-		if (Input.GetButtonDown ("RTrigger")) {
+		if (Input.GetButtonDown ("RTrigger") || Input.GetKeyDown (KeyCode.RightArrow)) {
 			print ("Button2");
 
 			Right ();

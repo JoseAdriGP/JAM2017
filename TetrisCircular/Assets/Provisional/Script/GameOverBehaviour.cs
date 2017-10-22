@@ -6,7 +6,7 @@ public class GameOverBehaviour : MonoBehaviour {
 	
 	void Update () {
 		
-		if (Input.anyKey) {
+		if (Input.anyKeyDown) {
 			transform.Find ("RawImage").gameObject.SetActive (true);
 		}
         

@@ -17,6 +17,8 @@ public class TetrominoColor : MonoBehaviour
 
 	private NextTetrominoManager tetrominoManager;
 
+	private int TetroModel = 1;
+
 	private Spawner.Shape getShapeForTetrominoIndex (int _i)
 	{
 		switch (_i) {
@@ -303,33 +305,90 @@ public class TetrominoColor : MonoBehaviour
 
 	public void Right ()
 	{
-	
+
+
+
+		if (TetrominoModel == 6) {
+
+			TetrominoModel = 0;
+			TetroModel = 0;
+
+		} 
+
 		if (TetrominoModel < FindObjectOfType<TetrominosList> ().MinoPos.Count - 1) {
 
-			TetrominoModel++;
+			if (TetrominoModel != 0) {
+
+				TetrominoModel++;
+
+			} else {
+
+				if (TetroModel == 0) {
+
+					TetroModel++;
+
+				} else {
+
+					TetrominoModel++;
+
+
+				}
+
+
+			}
+
 			SetTetrominoForm ();
-		} else {
-		
-			TetrominoModel = 0;
-		
-		
+
+			if (TetrominoModel == 6) {
+
+				TetrominoModel = 0;
+				TetroModel = 0;
+
+			}
 		}
 	
 	}
 
 	public void Left ()
 	{
+		if (TetrominoModel == 0) {
+
+			TetrominoModel = 6;
+			TetroModel = 0;
+
+		}
 
 		if (TetrominoModel > 0) {
 
-			TetrominoModel--;
+			if (TetrominoModel != 6) {
+
+				TetrominoModel--;
+			
+			} else {
+			
+				if (TetroModel == 0) {
+				
+					TetroModel++;
+				
+				} else {
+				
+					TetrominoModel--;
+
+				
+				}
+			
+			
+			}
+
 			SetTetrominoForm ();
-		} else {
 
-			TetrominoModel = 6;
+			if (TetrominoModel == 0) {
 
+				TetrominoModel = 6;
+				TetroModel = 0;
 
-		}
+			}
+		} 
 
 	
 	

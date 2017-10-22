@@ -12,10 +12,12 @@ public class NextTetrominoManager : MonoBehaviour
 
 	private bool ThereIsATetromino = false;
 
+    public AudioSource constructionAudio;
+
 
 	void Start ()
 	{
-		
+        constructionAudio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -30,6 +32,7 @@ public class NextTetrominoManager : MonoBehaviour
 
 		ThereIsATetromino = true;
 
+        constructionAudio.Play();
 	}
 
 	public Group ExtractTetromino ()

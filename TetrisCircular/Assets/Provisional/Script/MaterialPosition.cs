@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MaterialPosition : MonoBehaviour {
 
+    // public variable for the tree destruction Audio Clip
+    public AudioSource chainsawAudio;
+
 	// The kind of elements we are going to use in our field
 	public Sprite elementSprite1;
 	public Sprite elementSprite2;
@@ -133,6 +136,8 @@ public class MaterialPosition : MonoBehaviour {
 		} else {
 			foreach (GameObject element in elementList)
 			{
+                //play the destruction audio
+                chainsawAudio.Play();
 				Destroy (element,0.0f);
 			}
 			elementList.Clear ();
@@ -153,6 +158,7 @@ public class MaterialPosition : MonoBehaviour {
 		if(elementNumber > 72 || elementNumber <= 0){
 			elementNumber = 72;
 		}
+        chainsawAudio = GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame

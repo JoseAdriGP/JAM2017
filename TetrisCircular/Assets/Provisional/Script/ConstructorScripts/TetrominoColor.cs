@@ -101,7 +101,7 @@ public class TetrominoColor : MonoBehaviour
 		if (tetrominoManager.CheckIfTetroAvailable ())
 			return;
 		
-		if (Input.GetKeyDown (KeyCode.A)) {
+		if (Input.GetKeyDown (KeyCode.A) || Input.GetButtonDown ("BotonA")) {
 			//Verde
 			if (CheckIfColorIsValid ("Verde")) {
 				if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].ColorAsignado == "Verde") {
@@ -132,7 +132,7 @@ public class TetrominoColor : MonoBehaviour
 			
 			}
 
-		} else if (Input.GetKeyDown (KeyCode.B)) {
+		} else if (Input.GetKeyDown (KeyCode.B) || Input.GetButtonDown ("BotonB")) {
 			//Rojo
 			if (CheckIfColorIsValid ("Rojo")) {
 				if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].ColorAsignado == "Rojo") {
@@ -166,7 +166,7 @@ public class TetrominoColor : MonoBehaviour
 
 			}
 
-		} else if (Input.GetKeyDown (KeyCode.Y)) {
+		} else if (Input.GetKeyDown (KeyCode.Y) || Input.GetButtonDown ("BotonY")) {
 			//Amarillo
 			if (CheckIfColorIsValid ("Amarillo")) {
 				if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].ColorAsignado == "Amarillo") {
@@ -197,7 +197,7 @@ public class TetrominoColor : MonoBehaviour
 
 			}
 
-		} else if (Input.GetKeyDown (KeyCode.X)) {
+		} else if (Input.GetKeyDown (KeyCode.X) || Input.GetButtonDown ("BotonZ")) {
 			//Azul
 			if (CheckIfColorIsValid ("Azul")) {
 				if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].ColorAsignado == "Azul") {
@@ -328,14 +328,14 @@ public class TetrominoColor : MonoBehaviour
 	void CheckInput ()
 	{
 		
-		if (Input.GetButtonDown ("LeftBumper")) {
+		if (Input.GetButtonDown ("LTrigger")) {
 			print ("Button1");
 			Left ();
 		
 		
 		}
 
-		if (Input.GetButtonDown ("RightBumper")) {
+		if (Input.GetButtonDown ("RTrigger")) {
 			print ("Button2");
 
 			Right ();

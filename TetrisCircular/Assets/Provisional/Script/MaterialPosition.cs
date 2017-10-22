@@ -16,22 +16,78 @@ public class MaterialPosition : MonoBehaviour {
 	public GameObject elementType;
 	public int elementNumber;
 
-	public GameObject TopRightPosition;
-	public GameObject BottomLeftPosition;
+	public GameObject malla;
 
-
-	private List<Vector3> positionElements = new List<Vector3>();
+	private List<int> positionElements;
 	private List<GameObject> elementList;
 
 	// The funtion for generate de number of elements in radom position in a range we gave
 	public void ElementGenerator(int elements){
 		int selecter;
-		Vector3 randVec;
+		int randPos;
 		do{
-			randVec = new Vector3(Random.Range(BottomLeftPosition.GetComponent<Transform>().position.x, TopRightPosition.GetComponent<Transform>().position.x), Random.Range(BottomLeftPosition.GetComponent<Transform>().position.y, TopRightPosition.GetComponent<Transform>().position.y), 0.0f);
-			if(!positionElements.Contains(randVec)){
-				GameObject arbol = Instantiate(elementType,randVec,Quaternion.identity);
+			randPos = Random.Range(0, 72);
+			if(!positionElements.Contains(randPos)){
+				GameObject arbol = Instantiate(elementType, malla.transform.GetChild(randPos).gameObject.transform.position, Quaternion.identity);
+				float scaleChanger;
 				selecter = Random.Range(1, 8);
+
+				switch (randPos/6){
+				case 1:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 12;
+					scaleChanger=1.0f;
+					break;
+				case 2:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 11;
+					scaleChanger=0.9f;
+					break;
+				case 3:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 10;
+					scaleChanger= 0.85f;
+					break;
+				case 4:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 9;
+					scaleChanger= 0.8f;
+					break;
+				case 5:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 8;
+					scaleChanger= 0.75f;
+					break;
+				case 6:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 7;
+					scaleChanger= 0.7f;
+					break;
+				case 7:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 6;
+					scaleChanger= 0.65f;
+					break;
+				case 8:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 5;
+					scaleChanger= 0.6f;
+					break;
+				case 9:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 4;
+					scaleChanger= 0.55f;
+					break;
+				case 10:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 3;
+					scaleChanger= 0.5f;
+					break;
+				case 11:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 2;
+					scaleChanger= 0.45f;
+					break;
+				case 12:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 1;
+					scaleChanger= 0.4f;
+					break;
+				default:
+					arbol.GetComponent<SpriteRenderer>().sortingOrder = 1;
+					scaleChanger=1.0f;
+					break;
+				}
+
+				arbol.GetComponent<Transform>().localScale = new Vector3(scaleChanger,scaleChanger,1);
 
 				switch (selecter){
 					case 1:
@@ -60,7 +116,7 @@ public class MaterialPosition : MonoBehaviour {
 						break;
 				}
 					
-				positionElements.Add(randVec);
+				positionElements.Add(randPos);
 				elementList.Add(arbol);
 			}
 		}while(positionElements.Count != elements);
@@ -72,6 +128,7 @@ public class MaterialPosition : MonoBehaviour {
 			for(int i=0; i<elements; i++){
 				Destroy(elementList[elementList.Count-1], 0.0f);
 				elementList.RemoveAt (elementList.Count-1);
+				elementNumber -= elements;
 			}
 		} else {
 			foreach (GameObject element in elementList)
@@ -79,6 +136,7 @@ public class MaterialPosition : MonoBehaviour {
 				Destroy (element,0.0f);
 			}
 			elementList.Clear ();
+			elementNumber = 0;
 		}
 	}
 
@@ -86,10 +144,17 @@ public class MaterialPosition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		positionElements = new List<int>();
 		elementList = new List<GameObject>();
 		ElementGenerator(elementNumber);
 	}
-	
+
+	void Awake(){
+		if(elementNumber > 72 || elementNumber <= 0){
+			elementNumber = 72;
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 	

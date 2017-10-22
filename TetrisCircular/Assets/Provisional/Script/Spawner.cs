@@ -24,14 +24,22 @@ public class Spawner : MonoBehaviour {
 	}
 
 	public Group spawnNext(){
-		// Random Shape
-		int i = Random.Range(0, groups.Length);
-		Shape _shape = (Shape)System.Enum.Parse(typeof(Shape), ""+i);
+		NextTetrominoManager _nextPieceManager = FindObjectOfType<NextTetrominoManager> ();
+		if (_nextPieceManager.CheckIfTetroAvailable ()) {
+			Group _piece = _nextPieceManager.ExtractTetromino ();
+			_piece.goToSpawner ();
+			return _piece;
+		} else {
 
-		// Spawn Group at current Position
-		Group _piece = spawn(_shape, transform.position);
-		_piece.startPlaying ();
-		return _piece;
+			// Random Shape
+			int i = Random.Range (0, groups.Length);
+			Shape _shape = (Shape)System.Enum.Parse (typeof(Shape), "" + i);
+
+			// Spawn Group at current Position
+			Group _piece = spawn (_shape, transform.position);
+			_piece.startPlaying ();
+			return _piece;
+		}
 	}
 		
 	// Spawn Group at current Position

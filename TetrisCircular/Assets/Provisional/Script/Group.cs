@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Group : MonoBehaviour {
 
-	private const float STORE_SPEED = 120.0f;
+	private const float STORE_SPEED = 300.0f;
 
 	public GameObject BlockPrefab;
+    public enum Dpad { None, Right, Left, Up, Down };
+    private bool flag = true;
+    private Dpad control = Dpad.None;
 
 	public ColorManager.BlockColor _pieceColor;
 	public ColorManager.BlockColor PieceColor {
@@ -24,13 +27,26 @@ public class Group : MonoBehaviour {
 		playing = true;
 	}
 
-	public void goToNextPieceContainer () {
-		movementCoroutine = StartCoroutine (moveToNextPieceContainerCoroutine ());
+	public void goToSpawner () {
+		if (movementCoroutine != null)
+			StopCoroutine (movementCoroutine);
+
+		Spawner _spawner = FindObjectOfType<Spawner> ();
+		Vector3 _destination = _spawner.transform.position;
+		movementCoroutine = StartCoroutine (movePieceCoroutine (_destination, true));
 	}
+
+	public void goToNextPieceContainer () {
+		if (movementCoroutine != null)
+			StopCoroutine (movementCoroutine);
 		
-	private IEnumerator moveToNextPieceContainerCoroutine () {
 		NextTetrominoManager _nextPieceManager = FindObjectOfType<NextTetrominoManager> ();
 		Vector3 _destination = _nextPieceManager.NextTetrominoPos.position;
+		movementCoroutine = StartCoroutine (movePieceCoroutine (_destination, false));
+	}
+		
+	private IEnumerator movePieceCoroutine (Vector3 _destination, bool _enableWhenFinished) {
+		
 		while (true) {
 			Vector3 _movementVector = _destination - transform.localPosition;
 			float _displacement = Time.deltaTime * STORE_SPEED;
@@ -39,6 +55,9 @@ public class Group : MonoBehaviour {
 			if (_currentDistance < _displacement) {
 				transform.localPosition = _destination;
 				movementCoroutine = null;
+
+				if (_enableWhenFinished)
+					startPlaying ();
 				break;
 			}
 
@@ -49,8 +68,77 @@ public class Group : MonoBehaviour {
 			yield return null;
 		}
 	}
+      
+    void izquierda()
+        {
+        if (isValidGridPos())
+         {
+            transform.position += new Vector3(-1, 0, 0);
 
-	bool isValidGridPos() {        
+            // See if valid
+            if (isValidGridPos())
+                // It's valid. Update grid.
+                updateGrid();
+            else
+                // It's not valid. revert.
+                transform.position += new Vector3(1, 0, 0);
+         }
+        }
+
+
+        void derecha()
+        {
+            // Modify position
+            transform.position += new Vector3(1, 0, 0);
+
+            // See if valid
+            if (isValidGridPos())
+                // It's valid. Update grid.
+                updateGrid();
+            else
+                // It's not valid. revert.
+                transform.position += new Vector3(-1, 0, 0);
+        }
+
+
+        void rotar()
+        {
+            rotateGroup();
+        }
+
+    void bajar()
+    {
+        
+            // Modify position
+            transform.position += new Vector3(0, -1, 0);
+
+            // See if valid
+            if (isValidGridPos())
+            {
+                // It's valid. Update grid.
+                updateGrid();
+            }
+            else
+            {
+                // It's not valid. revert.
+                transform.position += new Vector3(0, 1, 0);
+
+                // Clear filled horizontal lines
+                Grid.deleteFullRows();
+
+                // Spawn next Group
+                FindObjectOfType<Spawner>().spawnNext();
+
+                // Leave children in the grid and die
+                unlinkChildren();
+                Destroy(gameObject);
+
+            lastFall = Time.time;
+        }
+    }
+
+
+        bool isValidGridPos() {        
 		foreach (Transform child in transform) {
 			Vector2 v = Grid.roundVec2(child.position);
 
@@ -128,9 +216,49 @@ public class Group : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-	
-	// Update is called once per frame
-	void Update() {
+
+    void PadControl()
+    {
+        if (Input.GetAxis("PadX") == 0.0)
+        {
+            control = Dpad.None;
+            flag = true;
+        }
+
+        if (Input.GetAxis("PadX") == 1f && flag)
+        {
+            StartCoroutine("DpadControl", Dpad.Right);
+        }
+        if (Input.GetAxis("PadX") == -1f && flag)
+        {
+            StartCoroutine("DpadControl", Dpad.Left);
+        }
+        if (Input.GetAxis("PadY") == 1f && flag)
+        {
+            StartCoroutine("DpadControl", Dpad.Up);
+        }
+        if (Input.GetAxis("PadY") == -1f)
+        {
+            StartCoroutine("DpadControl", Dpad.Down);
+
+        }
+    }
+
+    // your methods can go nice and easy here ! 
+    IEnumerator DpadControl(Dpad value)
+    {
+        flag = false;
+        yield return new WaitForSeconds(0.15f); // delay it as you wish 
+        if (value == Dpad.Right) derecha();  //** go right
+        if (value == Dpad.Left) izquierda();  //** go left
+        if (value == Dpad.Up) rotateGroup();  //** go up
+        if (value == Dpad.Down) bajar(); //** go down
+
+        StopCoroutine("DpadControl");
+    }
+
+    // Update is called once per frame
+    void Update() {
 		if (playing) {
 			// Move Left
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
@@ -191,7 +319,11 @@ public class Group : MonoBehaviour {
 				}
 
 				lastFall = Time.time;
-			}
-		}
+            }
+            else
+            {
+                PadControl();
+            }
+        }
 	}
 }

@@ -59,13 +59,18 @@ public class Grid : MonoBehaviour {
 	}
 
 	public static void deleteFullRows() {
+		bool _atLeastOneFullRow = false;
 		for (int y = 0; y < h; ++y) {
 			if (isRowFull(y)) {
 				deleteRow(y);
 				decreaseRowsAbove(y+1);
 				--y;
+
+				_atLeastOneFullRow = true;
 			}
 		}
+
+		SoundPlayer.Instance.playSlurp ();
 	}
 
 	// Use this for initialization

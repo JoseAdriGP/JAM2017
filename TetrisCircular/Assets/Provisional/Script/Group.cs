@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Group : MonoBehaviour {
 
@@ -128,6 +129,7 @@ public class Group : MonoBehaviour {
 
                 // Spawn next Group
                 FindObjectOfType<Spawner>().spawnNext();
+				SoundPlayer.Instance.playFallingPiece ();
 
                 // Leave children in the grid and die
                 unlinkChildren();
@@ -213,7 +215,8 @@ public class Group : MonoBehaviour {
 		// Default position not valid? Then it's game over
 		if (playing && !isValidGridPos()) {
 			Debug.Log("GAME OVER");
-			Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
+			//Destroy(gameObject);
 		}
 	}
 
@@ -312,6 +315,7 @@ public class Group : MonoBehaviour {
 
 					// Spawn next Group
 					FindObjectOfType<Spawner> ().spawnNext ();
+					SoundPlayer.Instance.playFallingPiece ();
 
 					// Leave children in the grid and die
 					unlinkChildren ();

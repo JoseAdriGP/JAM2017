@@ -32,6 +32,14 @@ public class NextTetrominoManager : MonoBehaviour
 
 	}
 
+	public Group ExtractTetromino ()
+	{
+		ThereIsATetromino = false;
+		Group _next = NextTetromino;
+		NextTetromino = null;
+		return _next;
+	}
+
 	public bool CheckIfTetroAvailable ()
 	{
 		return ThereIsATetromino;

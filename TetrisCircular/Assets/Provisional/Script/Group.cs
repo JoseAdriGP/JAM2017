@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Group : MonoBehaviour {
 
-	private const float STORE_SPEED = 120.0f;
+	private const float STORE_SPEED = 300.0f;
 
 	public GameObject BlockPrefab;
     public enum Dpad { None, Right, Left, Up, Down };
@@ -27,13 +27,26 @@ public class Group : MonoBehaviour {
 		playing = true;
 	}
 
-	public void goToNextPieceContainer () {
-		movementCoroutine = StartCoroutine (moveToNextPieceContainerCoroutine ());
+	public void goToSpawner () {
+		if (movementCoroutine != null)
+			StopCoroutine (movementCoroutine);
+
+		Spawner _spawner = FindObjectOfType<Spawner> ();
+		Vector3 _destination = _spawner.transform.position;
+		movementCoroutine = StartCoroutine (movePieceCoroutine (_destination, true));
 	}
+
+	public void goToNextPieceContainer () {
+		if (movementCoroutine != null)
+			StopCoroutine (movementCoroutine);
 		
-	private IEnumerator moveToNextPieceContainerCoroutine () {
 		NextTetrominoManager _nextPieceManager = FindObjectOfType<NextTetrominoManager> ();
 		Vector3 _destination = _nextPieceManager.NextTetrominoPos.position;
+		movementCoroutine = StartCoroutine (movePieceCoroutine (_destination, false));
+	}
+		
+	private IEnumerator movePieceCoroutine (Vector3 _destination, bool _enableWhenFinished) {
+		
 		while (true) {
 			Vector3 _movementVector = _destination - transform.localPosition;
 			float _displacement = Time.deltaTime * STORE_SPEED;
@@ -42,6 +55,9 @@ public class Group : MonoBehaviour {
 			if (_currentDistance < _displacement) {
 				transform.localPosition = _destination;
 				movementCoroutine = null;
+
+				if (_enableWhenFinished)
+					startPlaying ();
 				break;
 			}
 

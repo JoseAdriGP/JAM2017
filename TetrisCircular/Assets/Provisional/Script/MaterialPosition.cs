@@ -33,51 +33,51 @@ public class MaterialPosition : MonoBehaviour {
 				selecter = Random.Range(1, 8);
 
 				switch (randPos/6){
-				case 1:
+				case 0:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 12;
 					scaleChanger=1.0f;
 					break;
-				case 2:
+				case 1:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 11;
 					scaleChanger=0.9f;
 					break;
-				case 3:
+				case 2:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 10;
 					scaleChanger= 0.85f;
 					break;
-				case 4:
+				case 3:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 9;
 					scaleChanger= 0.8f;
 					break;
-				case 5:
+				case 4:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 8;
 					scaleChanger= 0.75f;
 					break;
-				case 6:
+				case 5:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 7;
 					scaleChanger= 0.7f;
 					break;
-				case 7:
+				case 6:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 6;
 					scaleChanger= 0.65f;
 					break;
-				case 8:
+				case 7:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 5;
 					scaleChanger= 0.6f;
 					break;
-				case 9:
+				case 8:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 4;
 					scaleChanger= 0.55f;
 					break;
-				case 10:
+				case 9:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 3;
 					scaleChanger= 0.5f;
 					break;
-				case 11:
+				case 10:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 2;
 					scaleChanger= 0.45f;
 					break;
-				case 12:
+				case 11:
 					arbol.GetComponent<SpriteRenderer>().sortingOrder = 1;
 					scaleChanger= 0.4f;
 					break;

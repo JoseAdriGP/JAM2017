@@ -12,7 +12,24 @@ public class ApplicationManager : MonoBehaviour {
         
 	}
 
-	public void Quit () 
+    public void creditosPartida()
+    {
+        SceneManager.LoadScene("Creditos");
+        //fadeCanvas.SetActive(true);
+
+    }
+
+    public void instrucciones()
+    {
+
+        //SceneManager.LoadScene("instrucciones");
+
+
+        //fadeCanvas.SetActive(true);
+
+    }
+
+    public void Quit () 
 	{
 		#if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;

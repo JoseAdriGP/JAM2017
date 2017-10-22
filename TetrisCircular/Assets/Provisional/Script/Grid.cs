@@ -31,6 +31,8 @@ public class Grid : MonoBehaviour {
 			Block _blockScript = _blockChild.GetComponent<Block> ();
 			_blockScript.drain ();
 		}
+		Points.puntos += 1000;
+
 	}
 
 	public static void decreaseRow(int y) {
@@ -44,6 +46,7 @@ public class Grid : MonoBehaviour {
 				grid[x, y-1].position += new Vector3(0, -1, 0);
 			}
 		}
+
 	}
 
 	public static void decreaseRowsAbove(int y) {

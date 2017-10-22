@@ -19,10 +19,10 @@ public class CurrentColorsManager : MonoBehaviour
 
 
 	//Static Function
-	public static int MinoRojo = 50;
-	public static int MinoAzul = 50;
-	public static int MinoAmarillo = 50;
-	public static int MinoVerde = 50;
+	public static int MinoRojo = 0;
+	public static int MinoAzul = 0;
+	public static int MinoAmarillo = 0;
+	public static int MinoVerde = 0;
 
 
 

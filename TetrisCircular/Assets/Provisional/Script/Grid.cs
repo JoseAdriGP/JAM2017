@@ -8,6 +8,7 @@ public class Grid : MonoBehaviour {
 	public static int w = 10;
 	public static int h = 25;
 	public static Transform[,] grid = new Transform[w, h];
+	private const int POINTS_PER_ROW = 100;
 
 	public static Vector2 roundVec2(Vector2 v) {
 		return new Vector2(Mathf.Round(v.x),
@@ -31,7 +32,7 @@ public class Grid : MonoBehaviour {
 			Block _blockScript = _blockChild.GetComponent<Block> ();
 			_blockScript.drain ();
 		}
-		Points.puntos += 1000;
+		Points.puntos += POINTS_PER_ROW;
 
 	}
 

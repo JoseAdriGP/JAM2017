@@ -6,8 +6,19 @@ public class Group : MonoBehaviour {
 
 	public GameObject BlockPrefab;
 
+	public ColorManager.BlockColor _pieceColor;
+	public ColorManager.BlockColor PieceColor {
+		get { return _pieceColor; }
+		set { _pieceColor = value; }
+	}
+
 	// Time since last gravity tick
 	float lastFall = 0;
+	bool playing = false;
+
+	public void startPlaying () {
+		playing = true;
+	}
 
 	bool isValidGridPos() {        
 		foreach (Transform child in transform) {
@@ -68,8 +79,12 @@ public class Group : MonoBehaviour {
 			transform.Rotate(0, 0, 90);
 	}
 
+	Group () {
+		PieceColor = ColorManager.BlockColor.UNKNOWN;
+	}
+
 	void Awake () {
-		ColorManager.BlockColor _groupColor = ColorManager.Instance.GetRandomColor ();
+		ColorManager.BlockColor _groupColor = PieceColor == ColorManager.BlockColor.UNKNOWN ? ColorManager.Instance.GetRandomColor () : PieceColor;
 		foreach (Transform child in transform) {
 			GameObject _block = Instantiate (BlockPrefab);
 			_block.transform.SetParent (child, false);
@@ -88,65 +103,67 @@ public class Group : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-		// Move Left
-		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-			// Modify position
-			transform.position += new Vector3(-1, 0, 0);
+		if (playing) {
+			// Move Left
+			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+				// Modify position
+				transform.position += new Vector3 (-1, 0, 0);
 
-			// See if valid
-			if (isValidGridPos())
+				// See if valid
+				if (isValidGridPos ())
 				// It's valid. Update grid.
-				updateGrid();
-			else
+				updateGrid ();
+				else
 				// It's not valid. revert.
-				transform.position += new Vector3(1, 0, 0);
-		}
-
-		// Move Right
-		else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-			// Modify position
-			transform.position += new Vector3(1, 0, 0);
-
-			// See if valid
-			if (isValidGridPos())
-				// It's valid. Update grid.
-				updateGrid();
-			else
-				// It's not valid. revert.
-				transform.position += new Vector3(-1, 0, 0);
-		}
-
-		// Rotate
-		else if (Input.GetKeyDown(KeyCode.UpArrow)) {
-			rotateGroup ();
-		}
-
-		// Move Downwards and Fall
-		else if (Input.GetKey(KeyCode.DownArrow) ||
-			Time.time - lastFall >= 1) {
-			// Modify position
-			transform.position += new Vector3(0, -1, 0);
-
-			// See if valid
-			if (isValidGridPos()) {
-				// It's valid. Update grid.
-				updateGrid();
-			} else {
-				// It's not valid. revert.
-				transform.position += new Vector3(0, 1, 0);
-
-				// Clear filled horizontal lines
-				Grid.deleteFullRows();
-
-				// Spawn next Group
-				FindObjectOfType<Spawner>().spawnNext();
-
-				// Leave children in the grid and die
-				unlinkChildren ();
-				Destroy (gameObject);
+				transform.position += new Vector3 (1, 0, 0);
 			}
 
-			lastFall = Time.time;
+			// Move Right
+			else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+				// Modify position
+				transform.position += new Vector3 (1, 0, 0);
+
+				// See if valid
+				if (isValidGridPos ())
+				// It's valid. Update grid.
+				updateGrid ();
+				else
+				// It's not valid. revert.
+				transform.position += new Vector3 (-1, 0, 0);
+			}
+
+			// Rotate
+			else if (Input.GetKeyDown (KeyCode.UpArrow)) {
+				rotateGroup ();
+			}
+
+			// Move Downwards and Fall
+			else if (Input.GetKey (KeyCode.DownArrow) ||
+			        Time.time - lastFall >= 1) {
+				// Modify position
+				transform.position += new Vector3 (0, -1, 0);
+
+				// See if valid
+				if (isValidGridPos ()) {
+					// It's valid. Update grid.
+					updateGrid ();
+				} else {
+					// It's not valid. revert.
+					transform.position += new Vector3 (0, 1, 0);
+
+					// Clear filled horizontal lines
+					Grid.deleteFullRows ();
+
+					// Spawn next Group
+					FindObjectOfType<Spawner> ().spawnNext ();
+
+					// Leave children in the grid and die
+					unlinkChildren ();
+					Destroy (gameObject);
+				}
+
+				lastFall = Time.time;
+			}
 		}
 	}
 }

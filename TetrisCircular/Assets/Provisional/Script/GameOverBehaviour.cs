@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameOverBehaviour : MonoBehaviour {
-
-    
 	
 	void Update () {
 		
-        if (Input.anyKey)
-        {
-            SceneManager.LoadScene("Menu");
-        }
+		if (Input.anyKey) {
+			transform.Find ("RawImage").gameObject.SetActive (true);
+		}
         
 	}
 }

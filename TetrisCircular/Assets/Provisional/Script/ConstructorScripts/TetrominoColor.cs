@@ -19,6 +19,7 @@ public class TetrominoColor : MonoBehaviour
 
 	private int TetroModel = 1;
 
+
 	private Spawner.Shape getShapeForTetrominoIndex (int _i)
 	{
 		switch (_i) {

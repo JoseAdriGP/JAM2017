@@ -169,15 +169,18 @@ public class MaterialPosition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		positionElements = new List<int>();
-		elementList = new List<GameObject>();
-		ElementGenerator(elementNumber);
+		
+		
 		updateTreeText ();
 	}
 
 	// At the init of the program
 	void Awake(){
-		if(elementNumber > 72 || elementNumber <= 0){
+        positionElements = new List<int>();
+        elementList = new List<GameObject>();
+        ElementGenerator(elementNumber);
+
+        if (elementNumber > 72 || elementNumber <= 0){
 			elementNumber = 72;
 		}
 	}

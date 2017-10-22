@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ApplicationManager : MonoBehaviour {
-	public GameObject fadeCanvas;
+	//public GameObject fadeCanvas;
 
 	public void empezarPartida(){
-		
-		fadeCanvas.SetActive (true);
-        
-	}
+
+        //fadeCanvas.SetActive (true);
+        SceneManager.LoadScene("1a");
+
+    }
 
     public void creditosPartida()
     {

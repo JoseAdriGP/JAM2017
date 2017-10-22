@@ -9,6 +9,7 @@ public class ApplicationManager : MonoBehaviour {
 	public void empezarPartida(){
 		
 		fadeCanvas.SetActive (true);
+        
 	}
 
 	public void Quit () 

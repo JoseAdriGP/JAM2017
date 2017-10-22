@@ -128,6 +128,7 @@ public class Group : MonoBehaviour {
 
                 // Spawn next Group
                 FindObjectOfType<Spawner>().spawnNext();
+				SoundPlayer.Instance.playFallingPiece ();
 
                 // Leave children in the grid and die
                 unlinkChildren();
@@ -312,6 +313,7 @@ public class Group : MonoBehaviour {
 
 					// Spawn next Group
 					FindObjectOfType<Spawner> ().spawnNext ();
+					SoundPlayer.Instance.playFallingPiece ();
 
 					// Leave children in the grid and die
 					unlinkChildren ();

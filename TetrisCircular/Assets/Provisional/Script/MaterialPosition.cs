@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MaterialPosition : MonoBehaviour {
 
-    // public variable for the tree destruction Audio Clip
-    public AudioSource chainsawAudio;
+	private const float TREE_SCALE_SPEED = 0.5f;
 
 	// The kind of elements we are going to use in our field
 	public Sprite elementSprite1;
@@ -25,6 +24,24 @@ public class MaterialPosition : MonoBehaviour {
 
 	private List<int> positionElements;
 	private List<GameObject> elementList;
+
+	private IEnumerator destroyTreeCoroutine (GameObject _tree) {
+		while (true) {
+			float _change = Time.deltaTime * TREE_SCALE_SPEED;
+			Vector3 _scale = _tree.transform.localScale;
+			if (_change > _scale.x) {
+				_tree.transform.localScale = Vector3.zero;
+				Destroy (_tree);
+				break;
+			}
+
+			_scale.x -= _change;
+			_scale.y -= _change;
+			_tree.transform.localScale = _scale;
+
+			yield return null;
+		}
+	}
 
 	// The funtion for generate de number of elements in radom position in a range we gave
 	public void ElementGenerator(int elements){
@@ -129,23 +146,18 @@ public class MaterialPosition : MonoBehaviour {
 
 	// The funtion to eliminate a numeber of elements in our field
 	public void deleteElements(int elements){
+		if (elements > elementList.Count)
+			elements = elementList.Count;
+		
 		if (elements < elementList.Count) {
 			for(int i=0; i<elements; i++){
 				//play the destruction audio
-				chainsawAudio.Play();
-				Destroy(elementList[elementList.Count-1], 0.0f);
+				SoundPlayer.Instance.playChainsaw();
+				StartCoroutine (destroyTreeCoroutine (elementList [elementList.Count - 1]));
+
 				elementList.RemoveAt (elementList.Count-1);
 				elementNumber -= elements;
 			}
-		} else {
-			foreach (GameObject element in elementList)
-			{
-                //play the destruction audio
-                chainsawAudio.Play();
-				Destroy (element,0.0f);
-			}
-			elementList.Clear ();
-			elementNumber = 0;
 		}
 		updateTreeText ();
 	}
@@ -168,7 +180,6 @@ public class MaterialPosition : MonoBehaviour {
 		if(elementNumber > 72 || elementNumber <= 0){
 			elementNumber = 72;
 		}
-        chainsawAudio = GetComponent<AudioSource>();
 	}
 
 

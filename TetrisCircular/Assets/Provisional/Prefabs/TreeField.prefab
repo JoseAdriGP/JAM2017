@@ -2391,6 +2391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d31da5e29b9641448c4afad7ed8fb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chainsawAudio: {fileID: 0}
   elementSprite1: {fileID: 21300000, guid: a35fea10ae455da48b2653ac95552162, type: 3}
   elementSprite2: {fileID: 21300000, guid: 4b04dd175dbcd39429088284afbdb79c, type: 3}
   elementSprite3: {fileID: 21300000, guid: 00f7875b5cff0cf489ee5d0ee247bec8, type: 3}
@@ -2436,7 +2437,7 @@ SpriteRenderer:
   m_SortingLayerID: -1233443977
   m_SortingLayer: -1
   m_SortingOrder: 14
-  m_Sprite: {fileID: 21300000, guid: 3cc7a82ac29d04242bd855d5b4057644, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6efebe867c7dbd6498206fae85ef474a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

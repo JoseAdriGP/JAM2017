@@ -22,7 +22,7 @@ public class ApplicationManager : MonoBehaviour {
     public void instrucciones()
     {
 
-        //SceneManager.LoadScene("instrucciones");
+        SceneManager.LoadScene("instructions");
 
 
         //fadeCanvas.SetActive(true);

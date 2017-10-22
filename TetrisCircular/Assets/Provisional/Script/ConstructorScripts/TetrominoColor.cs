@@ -308,6 +308,11 @@ public class TetrominoColor : MonoBehaviour
 
 			TetrominoModel++;
 			SetTetrominoForm ();
+		} else {
+		
+			TetrominoModel = 0;
+		
+		
 		}
 	
 	}
@@ -319,6 +324,11 @@ public class TetrominoColor : MonoBehaviour
 
 			TetrominoModel--;
 			SetTetrominoForm ();
+		} else {
+
+			TetrominoModel = 6;
+
+
 		}
 
 	

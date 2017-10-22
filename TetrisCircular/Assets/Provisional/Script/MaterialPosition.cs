@@ -21,6 +21,8 @@ public class MaterialPosition : MonoBehaviour {
 
 	public GameObject malla;
 
+	public TextMesh counter;
+
 	private List<int> positionElements;
 	private List<GameObject> elementList;
 
@@ -145,23 +147,31 @@ public class MaterialPosition : MonoBehaviour {
 			elementList.Clear ();
 			elementNumber = 0;
 		}
+		updateTreeText ();
 	}
 
-
+	// Update the number of trees in the portview
+	void updateTreeText(){
+		counter.GetComponent<TextMesh>().text = elementNumber.ToString();
+	}
 
 	// Use this for initialization
 	void Start () {
 		positionElements = new List<int>();
 		elementList = new List<GameObject>();
 		ElementGenerator(elementNumber);
+		updateTreeText ();
 	}
 
+	// At the init of the program
 	void Awake(){
 		if(elementNumber > 72 || elementNumber <= 0){
 			elementNumber = 72;
 		}
         chainsawAudio = GetComponent<AudioSource>();
 	}
+
+
 
 	// Update is called once per frame
 	void Update () {

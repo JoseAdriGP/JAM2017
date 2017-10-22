@@ -23,17 +23,17 @@ public class TetrominoColor : MonoBehaviour
 		case 0:
 			return Spawner.Shape.I;
 		case 1:
-			return Spawner.Shape.J;
-		case 2:
-			return Spawner.Shape.L;
-		case 3:
-			return Spawner.Shape.O;
-		case 4:
 			return Spawner.Shape.S;
-		case 5:
-			return Spawner.Shape.T;
-		default:
+		case 2:
 			return Spawner.Shape.Z;
+		case 3:
+			return Spawner.Shape.L;
+		case 4:
+			return Spawner.Shape.J;
+		case 5:
+			return Spawner.Shape.O;
+		default:
+			return Spawner.Shape.T;
 		}
 	}
 
@@ -328,14 +328,14 @@ public class TetrominoColor : MonoBehaviour
 	void CheckInput ()
 	{
 		
-		if (Input.GetButtonDown ("LTrigger") || Input.GetKeyDown (KeyCode.LeftArrow)) {
+		if (Input.GetButtonDown ("LTrigger") || Input.GetKeyDown (KeyCode.Q)) {
 			print ("Button1");
 			Left ();
 		
 		
 		}
 
-		if (Input.GetButtonDown ("RTrigger") || Input.GetKeyDown (KeyCode.RightArrow)) {
+		if (Input.GetButtonDown ("RTrigger") || Input.GetKeyDown (KeyCode.W)) {
 			print ("Button2");
 
 			Right ();

@@ -30,7 +30,8 @@ public class Spawner : MonoBehaviour {
 			_piece.goToSpawner ();
 			return _piece;
 		} else {
-
+			MaterialPosition _naturalResources = FindObjectOfType<MaterialPosition> ();
+			_naturalResources.deleteElements (1);
 			// Random Shape
 			int i = Random.Range (0, groups.Length);
 			Shape _shape = (Shape)System.Enum.Parse (typeof(Shape), "" + i);

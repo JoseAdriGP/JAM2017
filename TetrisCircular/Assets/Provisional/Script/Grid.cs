@@ -74,7 +74,8 @@ public class Grid : MonoBehaviour {
 			}
 		}
 
-		SoundPlayer.Instance.playSlurp ();
+		if (_atLeastOneFullRow)
+			SoundPlayer.Instance.playSlurp ();
 	}
 
 	// Use this for initialization

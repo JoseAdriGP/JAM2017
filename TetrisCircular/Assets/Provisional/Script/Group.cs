@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Group : MonoBehaviour {
 
+	private const float STORE_SPEED = 120.0f;
+
 	public GameObject BlockPrefab;
 
 	public ColorManager.BlockColor _pieceColor;
@@ -16,8 +18,36 @@ public class Group : MonoBehaviour {
 	float lastFall = 0;
 	bool playing = false;
 
+	private Coroutine movementCoroutine;
+
 	public void startPlaying () {
 		playing = true;
+	}
+
+	public void goToNextPieceContainer () {
+		movementCoroutine = StartCoroutine (moveToNextPieceContainerCoroutine ());
+	}
+		
+	private IEnumerator moveToNextPieceContainerCoroutine () {
+		NextTetrominoManager _nextPieceManager = FindObjectOfType<NextTetrominoManager> ();
+		Vector3 _destination = _nextPieceManager.NextTetrominoPos.position;
+		while (true) {
+			Vector3 _movementVector = _destination - transform.localPosition;
+			float _displacement = Time.deltaTime * STORE_SPEED;
+			float _currentDistance = _movementVector.magnitude;
+
+			if (_currentDistance < _displacement) {
+				transform.localPosition = _destination;
+				movementCoroutine = null;
+				break;
+			}
+
+			_movementVector = _movementVector * _displacement / _currentDistance;
+
+			transform.localPosition = transform.localPosition + _movementVector;
+
+			yield return null;
+		}
 	}
 
 	bool isValidGridPos() {        

@@ -6,7 +6,7 @@ public class NextTetrominoManager : MonoBehaviour
 {
 
 	// Use this for initialization
-	private GameObject NextTetromino;
+	private Group NextTetromino;
 
 	public Transform NextTetrominoPos;
 
@@ -24,11 +24,9 @@ public class NextTetrominoManager : MonoBehaviour
 		
 	}
 
-	public void NextTetrominoModel (GameObject Tetromino)
+	public void NextTetrominoModel (Group Tetromino)
 	{
 		NextTetromino = Tetromino;
-		
-		Instantiate (Tetromino, NextTetrominoPos.position, Quaternion.identity);
 
 		ThereIsATetromino = true;
 

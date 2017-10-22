@@ -15,6 +15,8 @@ public class TetrominoColor : MonoBehaviour
 	public Sprite ColorVerde;
 	public Sprite ColorAzul;
 
+	private NextTetrominoManager tetrominoManager;
+
 	private Spawner.Shape getShapeForTetrominoIndex (int _i) {
 		switch (_i) {
 		case 0:
@@ -37,7 +39,12 @@ public class TetrominoColor : MonoBehaviour
 	private void createPiece (ColorManager.BlockColor _color) {
 		Group _piece = FindObjectOfType<Spawner> ().spawn (getShapeForTetrominoIndex (TetrominoModel), transform.position);
 		_piece.PieceColor = _color;
-		// TODO MOVE PIECE TO NEXT PIECE CONTAINER
+		tetrominoManager.NextTetrominoModel (_piece);
+		_piece.goToNextPieceContainer ();
+	}
+
+	void Awake () {
+		tetrominoManager = FindObjectOfType<NextTetrominoManager> ();
 	}
 
 	void Start ()
@@ -87,7 +94,9 @@ public class TetrominoColor : MonoBehaviour
 
 	void CheckInputColor ()
 	{
-	
+		if (tetrominoManager.CheckIfTetroAvailable ())
+			return;
+		
 		if (Input.GetKeyDown (KeyCode.A)) {
 			//Verde
 			if (CheckIfColorIsValid ("Verde")) {

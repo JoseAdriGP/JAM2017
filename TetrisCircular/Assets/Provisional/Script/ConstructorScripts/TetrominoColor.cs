@@ -17,7 +17,8 @@ public class TetrominoColor : MonoBehaviour
 
 	private NextTetrominoManager tetrominoManager;
 
-	private Spawner.Shape getShapeForTetrominoIndex (int _i) {
+	private Spawner.Shape getShapeForTetrominoIndex (int _i)
+	{
 		switch (_i) {
 		case 0:
 			return Spawner.Shape.I;
@@ -36,14 +37,16 @@ public class TetrominoColor : MonoBehaviour
 		}
 	}
 
-	private void createPiece (ColorManager.BlockColor _color) {
+	private void createPiece (ColorManager.BlockColor _color)
+	{
 		Group _piece = FindObjectOfType<Spawner> ().spawn (getShapeForTetrominoIndex (TetrominoModel), transform.position);
 		_piece.PieceColor = _color;
 		tetrominoManager.NextTetrominoModel (_piece);
 		_piece.goToNextPieceContainer ();
 	}
 
-	void Awake () {
+	void Awake ()
+	{
 		tetrominoManager = FindObjectOfType<NextTetrominoManager> ();
 	}
 
@@ -58,6 +61,7 @@ public class TetrominoColor : MonoBehaviour
 	{
 		CheckInputColor ();
 		MinoActive ();
+		CheckInput ();
 	}
 
 	void SetTetrominoForm ()
@@ -319,6 +323,28 @@ public class TetrominoColor : MonoBehaviour
 
 	
 	
+	}
+
+	void CheckInput ()
+	{
+		
+		if (Input.GetButtonDown ("LeftBumper")) {
+			print ("Button1");
+			Left ();
+		
+		
+		}
+
+		if (Input.GetButtonDown ("RightBumper")) {
+			print ("Button2");
+
+			Right ();
+
+		}
+
+
+
+
 	}
 
 	void MinoActive ()

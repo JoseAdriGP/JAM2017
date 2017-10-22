@@ -898,7 +898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slurpAudio: {fileID: 8300000, guid: 601aa11aebd411d46907d27e4ce0bcee, type: 3}
   fallingPieceAudio: {fileID: 8300000, guid: 7ad364e01bd98504b901119f7e97de53, type: 3}
-  chainsawAudio: {fileID: 8300000, guid: 0dc30393ac85e1e41ad9b2de2f19e94c, type: 3}
+  chainsawAudio: {fileID: 8300000, guid: 2025698dc77999b43a91e02c8a9f1eb3, type: 3}
 --- !u!4 &1379405992
 Transform:
   m_ObjectHideFlags: 0

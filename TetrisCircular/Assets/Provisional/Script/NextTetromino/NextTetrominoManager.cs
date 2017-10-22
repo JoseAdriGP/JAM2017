@@ -6,13 +6,11 @@ public class NextTetrominoManager : MonoBehaviour
 {
 
 	// Use this for initialization
-	public GameObject NextTetromino;
+	private GameObject NextTetromino;
 
 	public Transform NextTetrominoPos;
 
-
-
-	public bool ThereIsATetromino = false;
+	private bool ThereIsATetromino = false;
 
 
 	void Start ()
@@ -32,34 +30,12 @@ public class NextTetrominoManager : MonoBehaviour
 		
 		Instantiate (Tetromino, NextTetrominoPos.position, Quaternion.identity);
 
-
-
 		ThereIsATetromino = true;
 
 	}
 
 	public bool CheckIfTetroAvailable ()
 	{
-	
-		bool Available = false;
-
-		if (ThereIsATetromino == true) {
-		
-			Available = true;
-
-			ThereIsATetromino = false;
-
-			return Available;
-		
-		
-		
-		}
-
-
-		return Available;
-	
-	
-	
-	
+		return ThereIsATetromino;
 	}
 }

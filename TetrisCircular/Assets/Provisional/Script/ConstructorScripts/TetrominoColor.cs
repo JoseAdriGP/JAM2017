@@ -36,7 +36,7 @@ public class TetrominoColor : MonoBehaviour
 
 	private void createPiece (ColorManager.BlockColor _color) {
 		Group _piece = FindObjectOfType<Spawner> ().spawn (getShapeForTetrominoIndex (TetrominoModel), transform.position);
-		_piece.PieceColor = ColorManager.BlockColor.BLUE;
+		_piece.PieceColor = _color;
 		// TODO MOVE PIECE TO NEXT PIECE CONTAINER
 	}
 

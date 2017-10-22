@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour {
 
 	public Group spawn(Shape _shape, Vector3 _pos) {
 		return Instantiate (groups [System.Int32.Parse(_shape.ToString("d"))],
-			_pos,
+			new Vector3(_pos.x, _pos.y, 0.0f),
 			Quaternion.identity).GetComponent<Group> ();
 	}
 

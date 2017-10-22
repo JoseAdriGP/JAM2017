@@ -83,19 +83,17 @@ public class Group : MonoBehaviour {
 		PieceColor = ColorManager.BlockColor.UNKNOWN;
 	}
 
-	void Awake () {
+	// Use this for initialization
+	void Start () {
 		ColorManager.BlockColor _groupColor = PieceColor == ColorManager.BlockColor.UNKNOWN ? ColorManager.Instance.GetRandomColor () : PieceColor;
 		foreach (Transform child in transform) {
 			GameObject _block = Instantiate (BlockPrefab);
 			_block.transform.SetParent (child, false);
 			_block.GetComponent<Block>().BlockColor = _groupColor;
 		}
-	}
 
-	// Use this for initialization
-	void Start () {
 		// Default position not valid? Then it's game over
-		if (!isValidGridPos()) {
+		if (playing && !isValidGridPos()) {
 			Debug.Log("GAME OVER");
 			Destroy(gameObject);
 		}

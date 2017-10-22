@@ -5,6 +5,7 @@ using UnityEngine;
 public class ColorManager : MonoBehaviour {
 
 	public enum BlockColor {
+		UNKNOWN,
 		GREEN,
 		RED,
 		BLUE,

@@ -9,13 +9,43 @@ public class TetrominoColor : MonoBehaviour
 	public string colorAsignado;
 	public int TetrominoModel = 0;
 
+	[Header ("Block Sprites")]
 	public Sprite ColorRed;
-
 	public Sprite ColorAmarillo;
-
 	public Sprite ColorVerde;
-
 	public Sprite ColorAzul;
+
+	private NextTetrominoManager tetrominoManager;
+
+	private Spawner.Shape getShapeForTetrominoIndex (int _i) {
+		switch (_i) {
+		case 0:
+			return Spawner.Shape.I;
+		case 1:
+			return Spawner.Shape.J;
+		case 2:
+			return Spawner.Shape.L;
+		case 3:
+			return Spawner.Shape.O;
+		case 4:
+			return Spawner.Shape.S;
+		case 5:
+			return Spawner.Shape.T;
+		default:
+			return Spawner.Shape.Z;
+		}
+	}
+
+	private void createPiece (ColorManager.BlockColor _color) {
+		Group _piece = FindObjectOfType<Spawner> ().spawn (getShapeForTetrominoIndex (TetrominoModel), transform.position);
+		_piece.PieceColor = _color;
+		tetrominoManager.NextTetrominoModel (_piece);
+		_piece.goToNextPieceContainer ();
+	}
+
+	void Awake () {
+		tetrominoManager = FindObjectOfType<NextTetrominoManager> ();
+	}
 
 	void Start ()
 	{
@@ -64,7 +94,9 @@ public class TetrominoColor : MonoBehaviour
 
 	void CheckInputColor ()
 	{
-	
+		if (tetrominoManager.CheckIfTetroAvailable ())
+			return;
+		
 		if (Input.GetKeyDown (KeyCode.A)) {
 			//Verde
 			if (CheckIfColorIsValid ("Verde")) {
@@ -80,7 +112,7 @@ public class TetrominoColor : MonoBehaviour
 					}
 					if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived == 4) {
 
-						print ("Instatiate Verde!!");
+						createPiece (ColorManager.BlockColor.GREEN);
 
 						AsignRandomColor ();
 						FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived = 0;
@@ -114,7 +146,7 @@ public class TetrominoColor : MonoBehaviour
 					}
 					if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived == 4) {
 
-						print ("Instatiate Rojo!!");
+						createPiece (ColorManager.BlockColor.RED);
 
 						AsignRandomColor ();
 						FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived = 0;
@@ -146,8 +178,7 @@ public class TetrominoColor : MonoBehaviour
 					}
 					if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived == 4) {
 
-						print ("Instatiate Amarillo!!");
-
+						createPiece (ColorManager.BlockColor.YELLOW);
 
 						AsignRandomColor ();
 						FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived = 0;
@@ -177,8 +208,7 @@ public class TetrominoColor : MonoBehaviour
 					}
 					if (FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived == 4) {
 
-						print ("Instatiate Azul!!");
-
+						createPiece (ColorManager.BlockColor.BLUE);
 
 						AsignRandomColor ();
 						FindObjectOfType< TetrominosList> ().MinoPos [TetrominoModel].NumActived = 0;

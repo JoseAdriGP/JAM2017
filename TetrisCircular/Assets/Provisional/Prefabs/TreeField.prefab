@@ -2391,7 +2391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d31da5e29b9641448c4afad7ed8fb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chainsawAudio: {fileID: 0}
   elementSprite1: {fileID: 21300000, guid: a35fea10ae455da48b2653ac95552162, type: 3}
   elementSprite2: {fileID: 21300000, guid: 4b04dd175dbcd39429088284afbdb79c, type: 3}
   elementSprite3: {fileID: 21300000, guid: 00f7875b5cff0cf489ee5d0ee247bec8, type: 3}
@@ -2400,7 +2399,7 @@ MonoBehaviour:
   elementSprite6: {fileID: 21300000, guid: db3de386a9a87564889da390d5bc3a3f, type: 3}
   elementSprite7: {fileID: 21300000, guid: e112dd9210015e94dbad88b39dfb2c3e, type: 3}
   elementType: {fileID: 1152007605215894}
-  elementNumber: 72
+  elementNumber: 30
   malla: {fileID: 1803956704865208}
   counter: {fileID: 102357727983395874}
 --- !u!212 &212391701385279334
